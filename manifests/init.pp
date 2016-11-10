@@ -35,7 +35,30 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class role_apache {
+class role_apache (
+  $vhosts_hash = undef,
+  ) {
+  
+  # Install Apache
+  class { 'apache':
+    mpm_module             => 'prefork',
+    root_directory_options => [
+      'Indexes',
+      'FollowSymlinks',
+      'MultiViews'
+    ],
+  }
 
+  # Create instances
+  class { 'apache::vhosts':
+    vhosts => $vhosts_hash,
+  }
+
+  # Apache modules
+  class { 'apache::mod::php': }
+  class { 'apache::mod::expires': }
+  class { 'apache::mod::headers': }
+  class { 'apache::mod::rewrite': }
+  class { 'apache::mod::vhost_alias': }
 
 }
