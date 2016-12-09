@@ -58,9 +58,7 @@ class role_apache (
   class {'::apache::mod::php':
     php_version => '7.0'
   }
-  class { 'apache::mod::expires': 
-    php_version => '7.0'
-  }
+  class { 'apache::mod::expires': }
   class { 'apache::mod::headers': }
   class { 'apache::mod::rewrite': }
   class { 'apache::mod::vhost_alias': }
