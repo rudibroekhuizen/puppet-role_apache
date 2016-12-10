@@ -55,6 +55,11 @@ class role_apache (
   }
 
   # Apache modules
+  class {'::apache::mod::php':
+    php_version => '7.0',
+    require     => Class['::php']
+  }
+  
   class { 'apache::mod::expires': }
   class { 'apache::mod::headers': }
   class { 'apache::mod::rewrite': }
