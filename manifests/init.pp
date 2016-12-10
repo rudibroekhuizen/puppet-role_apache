@@ -39,6 +39,8 @@ class role_apache (
   $vhosts_hash = undef,
   ) {
   
+  apt::ppa { 'ppa:ondrej/php-7.0': }
+  
   # Install Apache
   class { 'apache':
     mpm_module             => 'prefork',
@@ -57,6 +59,7 @@ class role_apache (
   # Apache modules
   class {'::apache::mod::php':
     php_version => '7.0'
+    require     => [Apt::Ppa['ppa:ondrej/php-7.0'],
   }
   class { 'apache::mod::expires': }
   class { 'apache::mod::headers': }
