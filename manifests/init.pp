@@ -39,7 +39,9 @@ class role_apache (
   $vhosts_hash = undef,
   ) {
   
-  apt::ppa { 'ppa:ondrej/php-7.0': }
+  # Repo for Apache PhP 7 modules
+  include '::apt'
+  ::apt::ppa { "ppa:ondrej/php": }
   
   # Install Apache
   class { 'apache':
@@ -59,7 +61,7 @@ class role_apache (
   # Apache modules
   class {'::apache::mod::php':
     php_version => '7.0'
-    require     => [Apt::Ppa['ppa:ondrej/php-7.0'],
+    require     => Apt::Ppa['ppa:ondrej/php'],
   }
   class { 'apache::mod::expires': }
   class { 'apache::mod::headers': }
