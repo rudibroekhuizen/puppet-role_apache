@@ -3,7 +3,8 @@
 class role_apache::letsencrypt {
 
   class { ::certbot:
-    config => $role_apache::letsencrypt_config,
+    manage_dependencies => false,
+    config              => $role_apache::letsencrypt_config,
   }
 
 }
