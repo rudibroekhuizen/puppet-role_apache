@@ -2,7 +2,7 @@
 #
 class role_apache::letsencrypt {
 
-  class { ::cerbot:
+  class { ::certbot:
     config => $role_apache::letsencrypt_config,
   }
 
