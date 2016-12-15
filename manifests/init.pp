@@ -37,6 +37,7 @@
 #
 class role_apache (
   $vhosts_hash = undef,
+  $letsencrypt_config = undef,
   ) {
   
   # Install Apache
@@ -54,15 +55,21 @@ class role_apache (
     vhosts => $vhosts_hash,
   }
 
-  # Apache modules
+  # Apache php module, ppa:ondrej/php is needed for php v7, installed by php module, so require php
   class {'::apache::mod::php':
     php_version => '7.0',
     require     => Class['::php']
   }
   
+  # Other Apache modules
   class { 'apache::mod::expires': }
   class { 'apache::mod::headers': }
   class { 'apache::mod::rewrite': }
   class { 'apache::mod::vhost_alias': }
-
+  
+  # Letsencrypt
+  class { 'role_apache::letsencrypt':
+    require => Class['::apache']
+  }
+  
 }
