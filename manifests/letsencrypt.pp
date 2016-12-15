@@ -7,4 +7,6 @@ class role_apache::letsencrypt {
     config              => $role_apache::letsencrypt_config,
   }
 
+# ./certbot-auto --apache -d broekhuizen.online
+
 }
