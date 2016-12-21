@@ -66,6 +66,7 @@ class role_apache (
   class { 'apache::mod::headers': }
   class { 'apache::mod::rewrite': }
   class { 'apache::mod::vhost_alias': }
+  class { 'apache::mod::ssl': }
   
   # Letsencrypt
   class { 'role_apache::letsencrypt':
